@@ -1,0 +1,30 @@
+Wazuh SIEM Health Check
+=======================
+
+Date: 2026-09-21T13:20:30+02:00
+Host: soc-01
+
+Services:
+---------
+wazuh-manager: active
+wazuh-indexer: active
+wazuh-dashboard: active
+filebeat: active
+
+Network:
+--------
+2: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    altname enp2s1
+    inet 192.168.220.129/24 brd 192.168.220.255 scope global dynamic noprefixroute ens33
+       valid_lft 1132sec preferred_lft 1132sec
+default via 192.168.220.2 dev ens33 proto dhcp src 192.168.220.129 metric 100
+192.168.220.0/24 dev ens33 proto kernel scope link src 192.168.220.129 metric 100
+
+Listening Ports:
+----------------
+tcp   LISTEN 0      511               0.0.0.0:443        0.0.0.0:*    users:(("node",pid=989,fd=19))
+tcp   LISTEN 0      128               0.0.0.0:1514       0.0.0.0:*    users:(("wazuh-remoted",pid=2779,fd=4))
+tcp   LISTEN 0      128               0.0.0.0:1515       0.0.0.0:*    users:(("wazuh-authd",pid=2599,fd=6))
+tcp   LISTEN 0      2048              0.0.0.0:55000      0.0.0.0:*    users:(("python3",pid=2552,fd=46))
+tcp   LISTEN 0      4096   [::ffff:127.0.0.1]:9200             *:*    users:(("java",pid=1728,fd=623))
+tcp   LISTEN 0      2048                 [::]:55000         [::]:*    users:(("python3",pid=2552,fd=47))
