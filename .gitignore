@@ -1,0 +1,7 @@
+wazuh-install.sh
+wazuh-install-files.tar
+*.tar
+*.tar.gz
+*.zip
+
+.sigma-venv/

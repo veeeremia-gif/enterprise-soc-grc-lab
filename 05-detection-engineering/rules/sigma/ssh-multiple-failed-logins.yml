@@ -1,0 +1,63 @@
+title: SSH Failed Authentication Event
+name: ssh_failed_authentication
+id: 7c6d1e53-8c2b-4d4a-9f91-2d5a8f0b4a11
+status: test
+description: >
+  Detects a failed SSH password authentication event that can be used
+  as a base event for brute-force correlation.
+
+author: EricVea
+date: 2026/10/02
+
+logsource:
+  product: linux
+  service: sshd
+
+detection:
+  selection:
+    message|contains: "Failed password"
+  condition: selection
+
+fields:
+  - user
+  - source_ip
+  - source_port
+
+falsepositives:
+  - User entered an incorrect password
+  - Automated administrative activity
+  - Authorized security testing
+
+level: medium
+
+tags:
+  - attack.credential-access
+  - attack.t1110
+
+---
+
+title: Multiple Failed SSH Authentication Attempts
+id: 4b9a21f8-3b3b-4d6c-8c2e-71d9c5a4f802
+status: experimental
+description: >
+  Detects multiple failed SSH authentication events from the same
+  source IP within a five-minute time window.
+
+author: EricVea
+date: 2026/10/02
+
+correlation:
+  type: event_count
+  rules:
+    - ssh_failed_authentication
+  group-by:
+    - source_ip
+  timespan: 5m
+  condition:
+    gte: 5
+
+level: medium
+
+tags:
+  - attack.credential-access
+  - attack.t1110
